@@ -13,12 +13,12 @@ jobs:
       group: deploy_servers
       cancel-in-progress: true
     env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      HOST: ${{ vars.HOST }}
-      DB_HOST: database
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
+      openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+      host: ${{ vars.HOST }}
+      db_host: database
+      db_port: 5432
+      db_user: postgres
+      db_password: postgres
     steps:
       - name: Check tree command installation
         id: tree_check
@@ -50,12 +50,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.event.inputs.target_branch }}
+          submodules: recursive
       - name: Display tree after project setup
         run: tree
       - name: Create .env.local file
         run: |
-          echo 'OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}"' >> Frontend/duke-chat/.env.local
-          echo "NEXT_PUBLIC_BACKEND_BASE_URL=https://${{ vars.HOST }}" >> Frontend/duke-chat/.env.local
+          echo 'OPENAI_API_KEY="${{ secrets.openai_api_key }}"' >> Frontend/duke-chat/.env.local
+          echo "NEXT_PUBLIC_BACKEND_BASE_URL=https://${{ vars.host }}" >> Frontend/duke-chat/.env.local
       - name: Build project
         run: docker compose build --no-cache
       - name: Run project
