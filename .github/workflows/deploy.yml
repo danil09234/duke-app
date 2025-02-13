@@ -48,10 +48,9 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
         with:
-          token: '${{ secrets.ACCESS_TOKEN }}'
+          token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.event.inputs.target_branch }}
-          submodules: recursive
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - run: git submodule sync --recursive
       - name: Display tree after project setup
         run: tree
       - name: Create .env.local file
