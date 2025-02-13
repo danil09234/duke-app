@@ -17,6 +17,7 @@ jobs:
       host: ${{ vars.HOST }}
       db_host: database
       db_port: 5432
+      db_name: duke
       db_user: postgres
       db_password: postgres
     steps:
