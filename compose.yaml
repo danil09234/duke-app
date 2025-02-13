@@ -1,0 +1,68 @@
+name: duke
+services:
+  backend:
+    build:
+      context: Backend
+      dockerfile: Dockerfile
+      args:
+        db_host: ${db_host}
+        db_port: ${db_port}
+        db_user: ${db_user}
+        db_password: ${db_password}
+        db_name: ${db_name}
+    depends_on:
+      database:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+        - action: rebuild
+          path: ./compose.yaml
+        - action: rebuild
+          path: ./ClientsBot/Dockerfile
+        - action: rebuild
+          path: ./ClientsBot/requirements.txt
+  database:
+    image: postgres:16
+    restart: always
+    ports:
+      - ${db_port}:${db_port}
+    expose:
+      - ${db_port}
+    environment:
+      POSTGRES_USER: ${db_user}
+      POSTGRES_PASSWORD: ${db_password}
+    volumes:
+      - duke_database_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+  frontend:
+    build:
+      context: Frontend
+      dockerfile: Dockerfile
+
+  web-server:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: WebServer/Dockerfile
+      args:
+        host: ${host}
+    expose:
+      - 80
+      - 443
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - /etc/nginx/ssl:/etc/nginx/ssl
+volumes:
+  duke_database_data:
