@@ -26,7 +26,7 @@ services:
           path: ./ClientsBot/requirements.txt
     command: [ "serve", "0.0.0.0", "80" ]
     volumes:
-      - ./data/:/app/data/
+      - ./Backend/data/:/app/data/
   database:
     image: postgres:16
     restart: always
