@@ -24,6 +24,7 @@ services:
           path: ./ClientsBot/Dockerfile
         - action: rebuild
           path: ./ClientsBot/requirements.txt
+    command: [ "serve", "0.0.0.0", "80" ]
   database:
     image: postgres:16
     restart: always
