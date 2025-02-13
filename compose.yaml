@@ -25,6 +25,8 @@ services:
         - action: rebuild
           path: ./ClientsBot/requirements.txt
     command: [ "serve", "0.0.0.0", "80" ]
+    volumes:
+      - ./data/:/app/data/
   database:
     image: postgres:16
     restart: always
