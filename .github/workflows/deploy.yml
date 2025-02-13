@@ -50,7 +50,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.event.inputs.target_branch }}
-      - run: git submodule sync --recursive
+      - run: git submodule update --remote
       - name: Display tree after project setup
         run: tree
       - name: Create .env.local file
