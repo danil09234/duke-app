@@ -49,8 +49,8 @@ services:
   web-server:
     stdin_open: true
     build:
-      context: .
-      dockerfile: WebServer/Dockerfile
+      context: WebServer
+      dockerfile: Dockerfile
       args:
         host: ${host}
     expose:
