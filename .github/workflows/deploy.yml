@@ -70,6 +70,7 @@ jobs:
           echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.next_public_supabase_anon_key }}" >> Frontend/duke-chat/.env.local
           echo "SERVICE_ROLE_KEY=${{ secrets.service_role_key }}" >> Frontend/duke-chat/.env.local
           echo "PW=${{ secrets.pw }}" >> Frontend/duke-chat/.env.local
+          echo "NODE_ENV=production" >> Frontend/duke-chat/.env.local
           echo "NEXT_PUBLIC_SITE_URL=" >> Frontend/duke-chat/.env.local
       - name: Build project
         run: docker compose build --no-cache
