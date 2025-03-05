@@ -15,6 +15,11 @@ jobs:
     env:
       openai_api_key: ${{ secrets.OPENAI_API_KEY }}
       host: ${{ vars.HOST }}
+      database_url: ${{ vars.DATABASE_URL }}
+      next_public_supabase_url: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+      next_public_supabase_anon_key: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      service_role_key: ${{ secrets.SERVICE_ROLE_KEY }}
+      pw: ${{ secrets.PW }}
       db_host: database
       db_port: 5432
       db_name: duke
@@ -60,6 +65,12 @@ jobs:
         run: |
           echo 'OPENAI_API_KEY="${{ secrets.openai_api_key }}"' >> Frontend/duke-chat/.env.local
           echo "NEXT_PUBLIC_BACKEND_BASE_URL=https://${{ vars.host }}" >> Frontend/duke-chat/.env.local
+          echo "DATABASE_URL=${{ vars.database_url }}" >> Frontend/duke-chat/.env.local
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ vars.next_public_supabase_url }}" >> Frontend/duke-chat/.env.local
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ vars.next_public_supabase_anon_key }}" >> Frontend/duke-chat/.env.local
+          echo "SERVICE_ROLE_KEY=${{ vars.service_role_key }}" >> Frontend/duke-chat/.env.local
+          echo "PW=${{ vars.pw }}" >> Frontend/duke-chat/.env.local
+          echo "NEXT_PUBLIC_SITE_URL=" >> Frontend/duke-chat/.env.local
       - name: Build project
         run: docker compose build --no-cache
       - name: Run project
