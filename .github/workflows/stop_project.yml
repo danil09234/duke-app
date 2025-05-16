@@ -7,6 +7,19 @@ jobs:
     concurrency:
       group: deploy_servers
       cancel-in-progress: true
+    env:
+      openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+      host: ${{ vars.HOST }}
+      database_url: ${{ vars.DATABASE_URL }}
+      next_public_supabase_url: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+      next_public_supabase_anon_key: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      service_role_key: ${{ secrets.SERVICE_ROLE_KEY }}
+      pw: ${{ secrets.PW }}
+      db_host: database
+      db_port: 5432
+      db_name: duke
+      db_user: postgres
+      db_password: postgres
     steps:
       - name: Check tree command installation
         id: tree_check
