@@ -1,6 +1,6 @@
 [submodule "Frontend"]
 	path = Frontend
-	url = git@github.com:danil09234/UI-UX-Prototype.git
+	url = git@github.com:danil09234/duke-frontend.git
 [submodule "Backend"]
 	path = Backend
-	url = git@github.com:danil09234/DUKE.git
+	url = git@github.com:danil09234/duke-tree.git
