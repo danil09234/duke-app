@@ -63,15 +63,15 @@ jobs:
         run: tree
       - name: Create .env.local file
         run: |
-          echo 'OPENAI_API_KEY="${{ secrets.openai_api_key }}"' >> Frontend/duke-chat/.env.local
-          echo "NEXT_PUBLIC_BACKEND_BASE_URL=https://${{ vars.host }}" >> Frontend/duke-chat/.env.local
-          echo "DATABASE_URL=${{ vars.database_url }}" >> Frontend/duke-chat/.env.local
-          echo "NEXT_PUBLIC_SUPABASE_URL=${{ vars.next_public_supabase_url }}" >> Frontend/duke-chat/.env.local
-          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.next_public_supabase_anon_key }}" >> Frontend/duke-chat/.env.local
-          echo "SERVICE_ROLE_KEY=${{ secrets.service_role_key }}" >> Frontend/duke-chat/.env.local
-          echo "PW=${{ secrets.pw }}" >> Frontend/duke-chat/.env.local
-          echo "NODE_ENV=production" >> Frontend/duke-chat/.env.local
-          echo "NEXT_PUBLIC_SITE_URL=" >> Frontend/duke-chat/.env.local
+          echo 'OPENAI_API_KEY="${{ secrets.openai_api_key }}"' >> duke-frontend/duke-chat/.env.local
+          echo "NEXT_PUBLIC_BACKEND_BASE_URL=https://${{ vars.host }}" >> duke-frontend/duke-chat/.env.local
+          echo "DATABASE_URL=${{ vars.database_url }}" >> duke-frontend/duke-chat/.env.local
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ vars.next_public_supabase_url }}" >> duke-frontend/duke-chat/.env.local
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.next_public_supabase_anon_key }}" >> duke-frontend/duke-chat/.env.local
+          echo "SERVICE_ROLE_KEY=${{ secrets.service_role_key }}" >> duke-frontend/duke-chat/.env.local
+          echo "PW=${{ secrets.pw }}" >> duke-frontend/duke-chat/.env.local
+          echo "NODE_ENV=production" >> duke-frontend/duke-chat/.env.local
+          echo "NEXT_PUBLIC_SITE_URL=" >> duke-frontend/duke-chat/.env.local
       - name: Build project
         run: docker compose build --no-cache
       - name: Run project

@@ -2,7 +2,7 @@ name: duke
 services:
   backend:
     build:
-      context: Backend
+      context: duke-tree
       dockerfile: Dockerfile
       args:
         db_host: ${db_host}
@@ -20,13 +20,9 @@ services:
           target: /app/src
         - action: rebuild
           path: ./compose.yaml
-        - action: rebuild
-          path: ./ClientsBot/Dockerfile
-        - action: rebuild
-          path: ./ClientsBot/requirements.txt
     command: [ "serve", "0.0.0.0", "80" ]
     volumes:
-      - ./Backend/data/:/app/data/
+      - ./duke-tree/data/:/app/data/
   database:
     image: postgres:16
     restart: always
@@ -46,12 +42,12 @@ services:
       retries: 5
   frontend:
     build:
-      context: Frontend
+      context: duke-frontend
       dockerfile: Dockerfile
   web-server:
     stdin_open: true
     build:
-      context: WebServer
+      context: web-server
       dockerfile: Dockerfile
       args:
         host: ${host}
